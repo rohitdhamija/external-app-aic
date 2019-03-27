@@ -39,14 +39,14 @@ var jsonBody = {
     }
 };
 
-var hmac = CryptoJS.HmacSHA256(JSON.stringify(jsonBody), 'KsVzlZpvJhthZBl2PDSuv6Lrn8eIsekN').toString();
+var hmac = CryptoJS.HmacSHA256(JSON.stringify(jsonBody), process.env.SECRET_KEY).toString();
 
 request.post({
    headers: {
        'content-type' : 'application/json', 
        'x-hub-signature':'sha256='+hmac
    },
-   url: 'https://botphx1I0002H5FD5DFbots-mpaasocimt.botmxp.ocp.oraclecloud.com:443/connectors/v1/tenants/idcs-100b89d671b54afca3069fe360e4bad4/listeners/application/channels/3cb0a9e1-b976-474a-bc86-fa479d6d383b',
+   url: process.env.AIC_URL,
    body:    JSON.stringify(jsonBody)
  }, 
 function(error, response, body){
