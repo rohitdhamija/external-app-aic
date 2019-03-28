@@ -17,7 +17,7 @@ const port=process.env.PORT || 3000;
 
 app.listen(port, function () {
   console.log('Dental care app listening on port: '+port);
-  
+  console.log(appointmentTime);
 
 })
 
@@ -31,7 +31,7 @@ app.post('/', function (req, res) {
 //var request = require("request");
 //var CryptoJS = require("crypto-js");
     
-  var appointmentTime = moment().add(2, 'hours').format('hh:mm A');
+
   console.log(appointmentTime);
 
 var jsonBody = {
