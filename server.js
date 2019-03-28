@@ -1,11 +1,13 @@
 const express = require('express');
 const request = require('request');
 const CryptoJS = require("crypto-js");
+var moment = require('moment');
 const app = express()
 const bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static('public'));
 app.set('view engine', 'ejs')
+var appointmentTime = moment().add(2, 'hours').format('MMMM Do YYYY, h:mm a');
 
 app.get('/', function (req, res) {
   res.render('index', {responseStatus: null});
@@ -14,7 +16,9 @@ app.get('/', function (req, res) {
 const port=process.env.PORT || 3000;
 
 app.listen(port, function () {
-  console.log('Dental care app listening on port: '+port)
+  console.log('Dental care app listening on port: '+port);
+  
+
 })
 
 app.post('/', function (req, res) {
@@ -26,6 +30,9 @@ app.post('/', function (req, res) {
   console.log(patientPhoneNumber);    
 //var request = require("request");
 //var CryptoJS = require("crypto-js");
+    
+  var appointmentTime = moment().add(2, 'hours').format('hh:mm A');
+  console.log(appointmentTime);
 
 var jsonBody = {
     "userId": patientPhoneNumber,
@@ -34,7 +41,8 @@ var jsonBody = {
         "payloadType": "msgReminder",
         "channelName": "DentalBotTwilioChannel",
         "variables": {
-        	"patientname": patientName
+        	"patientname": patientName,
+            "appointmentTime": appointmentTime
         }
     }
 };
