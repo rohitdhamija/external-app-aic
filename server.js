@@ -7,7 +7,7 @@ const bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static('public'));
 app.set('view engine', 'ejs')
-var appointmentTime = moment().add(2, 'hours').format('MMMM Do YYYY, h:mm a');
+var appointmentTime = moment().add(1, 'days').format('MMMM Do YYYY, h:mm a');
 
 app.get('/', function (req, res) {
   res.render('index', {responseStatus: null});
